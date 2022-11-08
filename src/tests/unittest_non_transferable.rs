@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use crate::contract::{handle, init, query};
-    use crate::expiration::Expiration;
+    use crate::utils::expiration::Expiration;
     use crate::inventory::Inventory;
     use crate::msg::{
         Burn, ContractStatus, HandleMsg, InitConfig, InitMsg, Mint, PostInitCallback, QueryAnswer,

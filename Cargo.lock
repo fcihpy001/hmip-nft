@@ -159,6 +159,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
 
 [[package]]
+name = "hmip-nft"
+version = "0.1.0"
+dependencies = [
+ "base64 0.12.3",
+ "bincode2",
+ "cosmwasm-schema",
+ "hex",
+ "primitive-types",
+ "rand_chacha",
+ "rand_core",
+ "schemars",
+ "secret-cosmwasm-std",
+ "secret-cosmwasm-storage",
+ "secret-toolkit",
+ "serde",
+ "serde-json-wasm",
+ "sha2",
+ "snafu",
+ "subtle",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -488,28 +510,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "snip721-reference-impl"
-version = "0.1.0"
-dependencies = [
- "base64 0.12.3",
- "bincode2",
- "cosmwasm-schema",
- "hex",
- "primitive-types",
- "rand_chacha",
- "rand_core",
- "schemars",
- "secret-cosmwasm-std",
- "secret-cosmwasm-storage",
- "secret-toolkit",
- "serde",
- "serde-json-wasm",
- "sha2",
- "snafu",
- "subtle",
 ]
 
 [[package]]

@@ -1,7 +1,7 @@
 [package]
-name = "snip721-reference-impl"
+name = "hmip-nft"
 version = "0.1.0"
-authors = ["bill wincer"]
+authors = ["fcihpy"]
 edition = "2018"
 
 exclude = [

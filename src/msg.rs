@@ -5,13 +5,13 @@ use serde::{Deserialize, Serialize};
 use cosmwasm_std::{Binary, Coin, HumanAddr};
 use secret_toolkit::permit::Permit;
 
-use crate::expiration::Expiration;
+use crate::utils::expiration::Expiration;
 use crate::mint_run::{MintRunInfo, SerialNumber};
 use crate::royalties::{DisplayRoyaltyInfo, RoyaltyInfo};
 use crate::token::{Extension, Metadata};
 
 /// Instantiation message
-#[derive(Serialize, Deserialize, JsonSchema)]
+#[derive(Serialize, Deserialize, JsonSchema,Debug)]
 pub struct InitMsg {
     /// name of token contract
     pub name: String,

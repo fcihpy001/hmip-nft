@@ -5,8 +5,8 @@ use serde::{Deserialize, Serialize};
 
 use cosmwasm_std::Env;
 
-use crate::rand::{sha_256, Prng};
-use crate::utils::{create_hashed_password, ct_slice_compare};
+use crate::utils::helper::{create_hashed_password, ct_slice_compare};
+use crate::utils::rand::{Prng, sha_256};
 
 pub const VIEWING_KEY_SIZE: usize = 32;
 

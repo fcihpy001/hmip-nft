@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use crate::contract::{handle, init, query};
-    use crate::expiration::Expiration;
+    use crate::utils::expiration::Expiration;
     use crate::mint_run::MintRunInfo;
     use crate::msg::{
         AccessLevel, BatchNftDossierElement, Cw721Approval, HandleMsg, InitConfig, InitMsg, Mint,
@@ -9,10 +9,7 @@ mod tests {
     };
     use crate::token::{Extension, Metadata};
     use cosmwasm_std::testing::*;
-    use cosmwasm_std::{
-        from_binary, Binary, BlockInfo, Env, Extern, HumanAddr, InitResponse, MessageInfo,
-        StdError, StdResult,
-    };
+    use cosmwasm_std::{from_binary, Binary, BlockInfo, Env, Extern, HumanAddr, InitResponse, MessageInfo, StdError, StdResult};
     use std::any::Any;
 
     // Helper functions
@@ -33,7 +30,7 @@ mod tests {
             config: None,
             post_init_callback: None,
         };
-
+        println!("init: {:?}", init_msg);
         (init(&mut deps, env, init_msg), deps)
     }
 
@@ -642,7 +639,7 @@ mod tests {
         let query_msg = QueryMsg::AllTokens {
             viewer: Some(viewer.clone()),
             start_after: Some("NFT2".to_string()),
-            limit: Some(10),
+            limit: Some(3),
         };
         let query_result = query(&deps, query_msg);
         assert!(

@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
-    use crate::contract::{check_permission, handle, init, query};
-    use crate::expiration::Expiration;
+    use crate::contract::{ handle, init, query};
+    use crate::utils::expiration::Expiration;
     use crate::inventory::Inventory;
     use crate::msg::{
         AccessLevel, Burn, ContractStatus, HandleAnswer, HandleMsg, InitConfig, InitMsg, Mint,
@@ -15,7 +15,7 @@ mod tests {
         PREFIX_PUB_META, PREFIX_RECEIVERS, PREFIX_VIEW_KEY,
     };
     use crate::token::{Extension, Metadata, Token};
-    use crate::viewing_key::{ViewingKey, VIEWING_KEY_SIZE};
+    use crate::utils::viewing_key::{ViewingKey, VIEWING_KEY_SIZE};
     use cosmwasm_std::testing::*;
     use cosmwasm_std::{
         from_binary, to_binary, Api, Binary, BlockInfo, CanonicalAddr, Coin, CosmosMsg, Env,
@@ -25,6 +25,7 @@ mod tests {
     use cosmwasm_storage::ReadonlyPrefixedStorage;
     use secret_toolkit::utils::space_pad;
     use std::any::Any;
+    use crate::query::check_permission;
 
     // Helper functions
 
@@ -44,7 +45,7 @@ mod tests {
             config: None,
             post_init_callback: None,
         };
-
+        println!("init::{:?}",init_msg);
         (init(&mut deps, env, init_msg), deps)
     }
 
@@ -92,12 +93,11 @@ mod tests {
             config: Some(init_config),
             post_init_callback: None,
         };
-
         (init(&mut deps, env, init_msg), deps)
     }
 
-    fn extract_error_msg<T: Any>(error: StdResult<T>) -> String {
-        match error {
+    fn extract_error_msg<T: Any>(result: StdResult<T>) -> String {
+        match result {
             Ok(_response) => panic!("Expected error, but had Ok response"),
             Err(err) => match err {
                 StdError::GenericErr { msg, .. } => msg,

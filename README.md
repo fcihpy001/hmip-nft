@@ -1,24 +1,4 @@
-# SNIP-721 Reference Implementation
-***NOTE***
-I'm making the code available early for people who are interested, but I still need to write the specification for SNIP-723 (which includes some miscellaneous improvements like a BatchNftDossier query, a NumTokensOfOwner query to retrieve the count of tokens owned by one address and in which the querier has permission know the tokens' ownership, and adding a token's unwrapped status to the NftDossier response).  I also still need to update this README with documentation of the additions.
-
-
-
-This is a reference implementation of the [SNIP-721 specification](https://github.com/SecretFoundation/SNIPs/blob/master/SNIP-721.md) and [SNIP-722 specification](https://github.com/baedrik/snip-722-spec/blob/master/SNIP-722.md).  It not only implements the base requirements of SNIP-721 and SNIP-722,  but it also includes additional functionality that may be helpful for many use cases.  As SNIP-721 is a superset of the [CW-721 specification](https://github.com/CosmWasm/cw-nfts/tree/main/packages/cw721), this implementation is CW-721 compliant; however, because CW-721 does not support privacy, a number of the CW-721-compliant functions may not return all the information a CW-721 implementation would.  For example, the [OwnerOf](#ownerof) query will not display the approvals for a token unless the token owner has supplied his address and viewing key.  In order to strive for CW-721 compliance, a number of queries that require authentication use optional parameters that the CW-721 counterpart does not have.  If the optional authentication parameters are not supplied, the responses will only display information that the token owner has made public.
-
-### Terms
-- __Message__ - This is an on-chain interface. It is triggered by sending a transaction, and receiving an on-chain response which is read by the client. Messages are authenticated both by the blockchain, and by the secret enclave.
-- __Query__ - This is an off-chain interface. Queries are done by returning data that a node has locally, and are not public. Query responses are returned immediately, and do not have to wait for blocks.
-- __Cosmos Message Sender__ - The account that is found under the `sender` field in a standard Cosmos SDK message. This is also the signer of the message.
-
-### Padding
-Users may want to enforce constant length messages to avoid leaking data. To support this functionality, every message includes an optional `padding` field. This optional `padding` field is ignored during message processing.
-
-### Requests
-Requests should be sent as base64 encoded JSON. Future versions of Secret Network may add support for other formats as well, but at this time we recommend usage of JSON only. For this reason the parameter descriptions specify the JSON type which must be used. In addition, request parameters will include in parentheses a CosmWasm (or other) underlying type that this value must conform to. E.g. a recipient address is sent as a string, but must also be parsed to a bech32 address.
-
-### Responses
-Message responses will be JSON encoded in the `data` field of the Cosmos response, rather than in the `logs`, except in the case of MintNft, BatchMintNft, and MintNftClones messages, where the token ID(s) will be returned in both the `data` and `logs` fields.  This is because minting may frequently be done by a contract, and `data` fields of responses from callback messages do not get forwarded to the sender of the initial message.
+# HMIP- NFT Implementation
 
 * [Instantiating The Token Contract](#Instantiating-The-Token-Contract)
 * Messages
@@ -2071,7 +2051,7 @@ The `transferable` field is mandatory for [SNIP-722](https://github.com/baedrik/
 The `unwrapped` field is mandatory for SNIP-723 (specification to be written) compliant contracts, but because SNIP-723 is an optional extension to SNIP-721, an NftDossier response might not include the field.  In this case, the `display_private_metadata_error` field might indicate that the private metadata is sealed if the querier has permission to normally view private metadata.  Or an [IsUnwrapped](#IsUnwrapped) query may be performed to learn the token's sealed status.  
 
 ### <a name="mintruninfo"></a> MintRunInfo
-MintRunInfo contains information about the minting of this token.
+MintRunInfo contains information aout the minting of this token.
 ```
 {
 	"collection_creator": "optional_address_that_instantiated_this_contract",

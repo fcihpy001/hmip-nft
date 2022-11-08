@@ -10,7 +10,7 @@ use secret_toolkit::{
 
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
-use crate::expiration::Expiration;
+use crate::utils::expiration::Expiration;
 use crate::msg::{Tx, TxAction};
 
 /// storage key for config
